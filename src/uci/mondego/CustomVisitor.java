@@ -127,9 +127,7 @@ public class CustomVisitor extends TreeVisitor {
       // is: " + methodId);
       collector.fileId = Long.parseLong(fileId);
       collector.methodId = Long.parseLong(methodId);
-      // System.out.println(collector);
       this.generateInputForTest(collector);
-      // this.generateInputForScc(collector);
     }
 
   }
@@ -153,7 +151,6 @@ public class CustomVisitor extends TreeVisitor {
       .append(collector.VDEC).append(internalSeparator)
       .append(collector.EXCT).append(internalSeparator)
       .append(collector.EXCR).append(internalSeparator)
-      .append(collector.CAST).append(internalSeparator)
       .append(collector.NAND).append(internalSeparator)
       .append(collector.VREF).append(internalSeparator)
       .append(collector.NOPR).append(internalSeparator)
@@ -169,7 +166,6 @@ public class CustomVisitor extends TreeVisitor {
       .append(collector.HBUG).append(internalSeparator)
       .append(collector.HLTH).append(internalSeparator)
       .append(collector.HVOL).append(internalSeparator)
-      .append(collector.NAND).append(internalSeparator)
       .append(collector.SLOC).append(internalSeparator)
       .append(collector.NOC).append(internalSeparator)
       .append(collector.NOCL).append(internalSeparator)

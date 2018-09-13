@@ -65,6 +65,7 @@ public class JavaMetricParser {
         BufferedReader br;
         try {
             this.initializeWriters();
+            this.addHeader();
             if ("dir".equals(inputMode)) {
                 this.inputProcessor = new FolderInputProcessor();
             } else if ("tgz".equals(inputMode)) {
@@ -91,6 +92,18 @@ public class JavaMetricParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addHeader() {
+      String header = "method name, path, NLOC, NIF, COMP, NOS, HVOC, HEFF, CREF, " +
+          "XMET, LMET, NOA, HDIF, VDEC, EXCT, EXCR, NAND, VREF, NOPR, MDN, NEXP, LOOP, NBLTRL, NCLTRL, NNLTRL, " +
+          "NNULLTRL, NSLTRL, CAST, HBUG, HLTH, HVOL, SLOC, NOC, NOCL, NTOKENS, TDN, UNAND, UNPOR" + "\n";
+      try {
+        FileWriters.metricsFileWriter.append(header);
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
 
     public static void main(String[] args) throws FileNotFoundException {
