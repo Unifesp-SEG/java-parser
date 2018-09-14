@@ -95,9 +95,9 @@ public class JavaMetricParser {
     }
 
     private void addHeader() {
-      String header = "method name, path, NLOC, NIF, COMP, NOS, HVOC, HEFF, CREF, " +
-          "XMET, LMET, NOA, HDIF, VDEC, EXCT, EXCR, NAND, VREF, NOPR, MDN, NEXP, LOOP, NBLTRL, NCLTRL, NNLTRL, " +
-          "NNULLTRL, NSLTRL, CAST, HBUG, HLTH, HVOL, SLOC, NOC, NOCL, NTOKENS, TDN, UNAND, UNPOR" + "\n";
+      String header = "name,path,NLOC,NIF,COMP,NOS,HVOC,HEFF,CREF," +
+          "XMET,LMET,NOA,HDIF,VDEC,EXCT,EXCR,NAND,VREF,NOPR,MDN,NEXP,LOOP,NBLTRL,NCLTRL,NNLTRL," +
+          "NNULLTRL,NSLTRL,CAST,HBUG,HLTH,HVOL,SLOC,NOC,NOCL,NTOKENS,TDN,UNAND,UNPOR" + "\n";
       try {
         FileWriters.metricsFileWriter.append(header);
       } catch (IOException e) {
