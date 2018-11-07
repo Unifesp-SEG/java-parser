@@ -23,6 +23,7 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.comments.BlockComment;
 import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.comments.LineComment;
+import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.ArrayAccessExpr;
 import com.github.javaparser.ast.expr.ArrayCreationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
@@ -98,6 +99,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 public class MethodVisitor extends VoidVisitorAdapter<MetricCollector> {
     private boolean isDebugOn = true;
+    
 
     @Override
     public void visit(IfStmt n, MetricCollector arg) {
@@ -345,11 +347,16 @@ public class MethodVisitor extends VoidVisitorAdapter<MetricCollector> {
         arg.addToken("catch");
         arg.EXCR = arg.EXCR + StringUtils.countMatches(n.toString(), "|")+1; // heuristic catch (NullPointExcep | IOEXcep e)
         arg.incCOMPCount();
+        arg.EXH = 1;
        // this.inspect(n);
         for(Node c : n.getChildNodes()){
             if (c instanceof Parameter){
                 String[] tokens = c.toString().split("\\s+");
                 MapUtils.addOrUpdateMap(arg.mapVariableDeclared, tokens[tokens.length-1].trim());
+            }
+            if(c instanceof BlockStmt) {
+              if (((BlockStmt) c).getStatements().isEmpty())
+                arg.EMC = 1;
             }
         }
     }
@@ -508,7 +515,8 @@ public class MethodVisitor extends VoidVisitorAdapter<MetricCollector> {
     @Override
     public void visit(LineComment n, MetricCollector arg) {
         // TODO Auto-generated method stub
-        //super.visit(n, arg);
+        super.visit(n, arg);
+        this.incNOCL(n, arg);
     }
 
     @Override
@@ -884,6 +892,8 @@ public class MethodVisitor extends VoidVisitorAdapter<MetricCollector> {
         // TODO Auto-generated method stub
         super.visit(n, arg);
     }
+    
+    
 
     private void debug(Node n) {
         if (this.isDebugOn) {
@@ -955,6 +965,11 @@ public class MethodVisitor extends VoidVisitorAdapter<MetricCollector> {
     private void incNEXP(Node n, MetricCollector arg){
         //this.debug(n);
         arg.NEXP++;
+    }
+    
+    private void incNOCL(LineComment n, MetricCollector arg) {
+      // TODO Auto-generated method stub
+      arg.NOCL++;
     }
     
 }

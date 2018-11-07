@@ -22,7 +22,7 @@ public class CustomVisitor extends TreeVisitor {
   String fileContent;
   Path path;
   SourceCodeLineCounter sourceCodeLineCounter;
-  boolean APPLY_SLOC_FILTER = true;
+  boolean APPLY_SLOC_FILTER = false;
   int MIN_SLOC_ALLOWED = 0;
 
   public CustomVisitor(File file) {
@@ -137,7 +137,7 @@ public class CustomVisitor extends TreeVisitor {
     StringBuilder metricString = new StringBuilder("");
     StringBuilder metadataString = new StringBuilder("");
     metricString
-      .append(collector.NLOC).append(internalSeparator)
+      //.append(collector.NLOC).append(internalSeparator)
       .append(collector.NIF).append(internalSeparator)
       .append(collector.COMP).append(internalSeparator)
       .append(collector.NOS).append(internalSeparator)
@@ -163,16 +163,18 @@ public class CustomVisitor extends TreeVisitor {
       .append(collector.NNULLTRL).append(internalSeparator)
       .append(collector.NSLTRL).append(internalSeparator)
       .append(collector.CAST).append(internalSeparator)
-      .append(collector.HBUG).append(internalSeparator)
+      //.append(collector.HBUG).append(internalSeparator)
       .append(collector.HLTH).append(internalSeparator)
       .append(collector.HVOL).append(internalSeparator)
       .append(collector.SLOC).append(internalSeparator)
-      .append(collector.NOC).append(internalSeparator)
+      //.append(collector.NOC).append(internalSeparator)
       .append(collector.NOCL).append(internalSeparator)
       .append(collector.NTOKENS).append(internalSeparator)
-      .append(collector.TDN).append(internalSeparator)
+      //.append(collector.TDN).append(internalSeparator)
       .append(collector.UNAND).append(internalSeparator)
-      .append(collector.UNPOR);
+      .append(collector.UNPOR).append(internalSeparator)
+      .append(collector.EXH).append(internalSeparator)
+      .append(collector.EMC);
 
     String file = collector._file.getName().toString();
     metadataString.append(file.substring(0, file.length() - 4) + collector._methodName).append(internalSeparator)

@@ -20,7 +20,7 @@ public class MetricCollector {
     public int EXCR; // Number of exceptions referenced
     public int EXCT; // Number of exceptions thrown
     public long fileId;
-    public int HBUG = 0;// Halstead prediction of number of bugs
+    public double HBUG = 0;// Halstead prediction of number of bugs
     public int HDIF; // Halstead difficulty to implement a method
     public double HEFF; // Halstead effort to implement a method
     public int HLTH; // halstead length. not part of features
@@ -86,6 +86,9 @@ public class MetricCollector {
     public int VDEC; // Number of variables declared
     public int VREF; // number of variables referenced
     public int XMET; // number of external methods called by the method
+    
+    public int EMC = 0; // new metric: empty catch
+    public int EXH = 0; // new metric: exception handling
 
     public void addFieldAccessActionTokens(String fieldAccessString) {
         String[] tokens = fieldAccessString.split("\\.");
@@ -148,6 +151,7 @@ public class MetricCollector {
         this.setHDIF();
         this.setHVOL();
         this.setHEFF();
+        this.setHBUG();
     }
 
     private String convertByteArrayToHexString(byte[] arrayBytes) {
@@ -243,6 +247,10 @@ public class MetricCollector {
     }
     // subtracts map 2 from map 1
 
+    private void setHBUG() {
+       this.HBUG = this.HVOL / 3000.0; 
+    }
+    
     @Override
     public String toString() {
         return "MetricCollector [_path=" + _path + ", _methodName=" + _methodName + ", CAST=" + CAST + ", COMP=" + COMP
